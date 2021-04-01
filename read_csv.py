@@ -1,6 +1,6 @@
 import csv
 
-with open('csv/package_file.csv') as csv_file:
-    read_csv = csv.reader(csv_file, delimiter=",")
-    for row in read_csv:
+with open('csv/package_file.csv') as package_file:
+    read_file = csv.reader(package_file, delimiter=",")
+    for row in read_file:
         print(row)
