@@ -1,33 +1,10 @@
 #import statements
 import csv
 import hash_table as hash_table
+import package_class as PackageClass
 
 # Hash table instance
 my_hash = hash_table.HashTable()
-
-# Package class that holds a package's data
-class Package:
-    def __init__(self, id, address, city, state, zip, deadline, weight, notes):
-        self.id = id,
-        self.address = address,
-        self.city = city,
-        self.state = state,
-        self.zip = zip,
-        self.deadline = deadline,
-        self.weight = weight,
-        self.notes = notes
-
-    # __str__ func to convert data obj to string
-    def __str__(self):
-        return "%s, %s, %s, %s, %s, %s, %s, %s" % (
-            self.id,
-            self.address,
-            self.city,
-            self.state,
-            self.zip,
-            self.deadline,
-            self.weight,
-            self.notes)
 
 # reading csv file
 def read_csv_file(filename):
@@ -48,7 +25,7 @@ def parse_data(package_data):
         package_weight = package[6]
         package_notes = package[7]
         
-        package = Package(package_id,
+        package = PackageClass.Package(package_id,
                         package_address,
                         package_city,
                         package_state,
@@ -62,4 +39,4 @@ read_csv_file('csv/package_file.csv')
 
 # get data from hash table
 for i in range(len(my_hash.table) + 1):
-    print("Key: {} and Movie: {}".format(i + 1, my_hash.search(i + 1)))
+		print(my_hash.search(i + 1))
