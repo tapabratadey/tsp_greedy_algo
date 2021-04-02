@@ -39,4 +39,4 @@ read_csv_file('csv/package_file.csv')
 
 # get data from hash table
 for i in range(len(my_hash.table) + 1):
-		print(my_hash.search(i + 1))
+    print(my_hash.search(i + 1))
