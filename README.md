@@ -1,1 +1,1 @@
-# tst_reedy_algo
+# tsp_reedy_algo
