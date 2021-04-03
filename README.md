@@ -1,1 +1,1 @@
-# greedy_algo
+# tst_reedy_algo
