@@ -1,6 +1,7 @@
 # Package class that holds a package's data
 class Package:
-    def __init__(self, id, address, city, state, zip, deadline, weight, notes):
+    def __init__(self, id, address, city, state,
+                zip, deadline, weight, notes):
         self.id = id,
         self.address = address,
         self.city = city,
@@ -21,3 +22,16 @@ class Package:
             self.deadline,
             self.weight,
             self.notes)
+
+# # Truck class to store truck info
+# class Truck:
+#   def __init__(self, name):
+#     self.name = name,
+#     # self.package_info = package_info
+#     self.package_info = []
+
+#   def load_package(self, package):
+#       self.package_info.append(package)
+
+#   def __str__(self):
+#       return "%s, %s" % (self.name, self.package_info)

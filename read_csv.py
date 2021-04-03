@@ -1,7 +1,8 @@
 #import statements
 import csv
 import hash_table as hash_table
-import package_class as PackageClass
+import classes as Class
+import load_truck as delivery
 
 # Hash table instance
 my_hash = hash_table.HashTable()
@@ -25,7 +26,7 @@ def parse_data(package_data):
         package_weight = package[6]
         package_notes = package[7]
         
-        package = PackageClass.Package(package_id,
+        package = Class.Package(package_id,
                         package_address,
                         package_city,
                         package_state,
@@ -34,9 +35,8 @@ def parse_data(package_data):
                         package_weight,
                         package_notes)
         my_hash.add(package_id, package)
+        delivery.load_trucks(package)
 
-read_csv_file('csv/package_file.csv')
-
-# get data from hash table
-for i in range(len(my_hash.table) + 1):
-    print(my_hash.search(i + 1))
+# search data from hash table
+# for i in range(len(my_hash.table) + 1):
+#     print(my_hash.search(i + 1))
