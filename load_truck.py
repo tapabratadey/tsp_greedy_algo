@@ -9,19 +9,17 @@ def load_trucks(package):
     load_second_delivery(package)    
     load_third_delivery(package)
     load_remaining_packages(package)
-    
+
 #8:00
 def load_first_delivery(package):
     if (package.deadline[0] != 'EOD' or package.id[0] == 19):
       if 'Delayed' not in package.notes:
           first_delivery.append(package)
-          # print("first", package.id[0], package.zip[0], package.address[0])
 
 #9:05
 def load_second_delivery(package):
     if 'Delayed' in package.notes or 'Can only ' in package.notes:
       second_delivery.append(package)
-      # print("second", package.zip[0], package.address[0])
 
 def load_third_delivery(package):
     # packages in same address
@@ -39,7 +37,6 @@ def load_remaining_packages(package):
   if (package not in first_delivery and
       package not in second_delivery and
       package not in third_delivery):
-        # print(package.id, package.address[0], package.zip[0])
         if (package.zip[0] == '84115' or
             package.address[0] == '1330 2100 S'):
               first_delivery.append(package)
