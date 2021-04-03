@@ -1,1 +1,1 @@
-# tsp_reedy_algo
+# tsp_greedy_algo
