@@ -40,7 +40,6 @@ def parse_data(package_data):
                         package_status,
                         package_delivery_start,
                         package_address_location)
-        print(package)
         my_hash.add(package_id, package)
         delivery.load_trucks(package)
 

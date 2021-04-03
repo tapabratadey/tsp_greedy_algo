@@ -2,8 +2,11 @@
 
 import load_truck as truck
 import read_csv as csv
+import calc_dist as dist
 
 csv.read_csv_file('csv/package_file.csv')
+dist.read_distance_data('csv/distance_table_data.csv', "data")
+dist.read_distance_data('csv/distance_table_data_name.csv', "name")
 
 def welcome_msg():
     print("\nWelcome to Parcel Delivery Service")
