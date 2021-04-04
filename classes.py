@@ -3,16 +3,16 @@ class Package:
     def __init__(self, id, address, city, state,
                 zip, deadline, weight, notes,
                 status, delivery_start,address_location):
-        self.id = id,
-        self.address = address,
-        self.city = city,
-        self.state = state,
-        self.zip = zip,
-        self.deadline = deadline,
-        self.weight = weight,
+        self.id = id
+        self.address = address
+        self.city = city
+        self.state = state
+        self.zip = zip
+        self.deadline = deadline
+        self.weight = weight
         self.notes = notes
-        self.status = status,
-        self.delivery_start = delivery_start,
+        self.status = status
+        self.start_time = delivery_start
         self.address_location = address_location
 
     # __str__ func to convert data obj to string
@@ -27,7 +27,7 @@ class Package:
             self.weight,
             self.notes,
             self.status,
-            self.delivery_start,
+            self.start_time,
             self.address_location)
 
 # # Truck class to store truck info

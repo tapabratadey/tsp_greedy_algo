@@ -25,9 +25,9 @@ def parse_data(package_data):
         package_deadline = package[5]
         package_weight = package[6]
         package_notes = package[7]
-        package_status = 'At hub',
-        package_delivery_start = '',
-        package_address_location = '',
+        package_status = "At hub"
+        package_delivery_start_time = ""
+        package_address_location = ""
         
         package = Class.Package(package_id,
                         package_address,
@@ -38,7 +38,7 @@ def parse_data(package_data):
                         package_weight,
                         package_notes,
                         package_status,
-                        package_delivery_start,
+                        package_delivery_start_time,
                         package_address_location)
         my_hash.add(package_id, package)
         delivery.load_trucks(package)

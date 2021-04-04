@@ -1,6 +1,5 @@
 import csv
 
-
 def read_distance_data(filename, tag):
 	if tag == "data":
 		with open(filename) as dist_data_file:
@@ -11,5 +10,11 @@ def read_distance_data(filename, tag):
 			dist_data_name = list(csv.reader(dist_data_name_file, delimiter=','))
 			# print(dist_data_name[1][0])
 
+
+# def d
+
+
+# sort the truck packages
+# 
 		
 
