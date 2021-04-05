@@ -7,8 +7,8 @@ import calc_dist as dist
 
 def init_prog():
   csv.read_csv_file('csv/package_file.csv')
-  dist.read_distance_data('csv/distance_table_data.csv', "data")
-  dist.read_distance_data('csv/distance_table_data_name.csv', "name")
+  # dist.read_distance_data('csv/distance_table_data.csv', "data")
+  # dist.read_distance_data('csv/distance_table_data_name.csv', "name")
   # pckg_hndl.update_delivery_start_time()
 
 def welcome_msg():
@@ -17,7 +17,7 @@ def welcome_msg():
 
 
 def display_total_distance_traveled():
-    print("Total mileage traveled by all trucks : [X] miles\n")
+    print("Total miles traveled : ", dist.total_dist(), " miles\n")
 
 
 def testing():
@@ -25,6 +25,7 @@ def testing():
     #   print(truck.first_delivery[i].start_time)
 
     # print(truck.first_delivery[1].address)
+    # print("testing: ", truck.get_first_delivery()[0])
     print("first: ", len(truck.first_delivery))
     print("second: ", len(truck.second_delivery))
     print("third: ", len(truck.third_delivery))
