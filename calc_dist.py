@@ -15,8 +15,15 @@ first_total_dist = 0
 second_total_dist = 0
 third_total_dist = 0
 
+def updt_packages():
+	pckg_hndl.updt_pkg_loc(truck.first_delivery, dist_data_name)
+	pckg_hndl.updt_pkg_loc(truck.second_delivery, dist_data_name)
+	pckg_hndl.updt_pkg_loc(truck.third_delivery, dist_data_name)
+
+def find_fastest_route():
+	pckg_hndl.fastest_route(truck.first_delivery, "first", 0, dist_data)
+
 def total_dist():
-	pckg_hndl.updt_first_pkg_loc(truck.first_delivery, dist_data_name)
-	pckg_hndl.updt_second_pkg_loc(truck.second_delivery, dist_data_name)
-	pckg_hndl.updt_third_pkg_loc(truck.third_delivery, dist_data_name)
+	updt_packages()
+	find_fastest_route()
 	return first_total_dist + second_total_dist + third_total_dist

@@ -23,27 +23,30 @@ first_delivery_list = []
 second_delivery_list = []
 third_delivery_list = []
 
-def updt_first_pkg_loc(first_delivery, csv_address):
-	for i in range(len(first_delivery)):
+def updt_pkg_loc(delivery_num, csv_address):
+	for i in range(len(delivery_num)):
 		for j in range(len(csv_address)):
-			if (first_delivery[i].address == csv_address[j][2]):
-				first_delivery_list.append(csv_address[j][0])
-				first_delivery[i].address_location = csv_address[j][0]
-				# print(first_delivery[i])
+			if (delivery_num[i].address == csv_address[j][2]):
+				delivery_num[i].address_location = int(csv_address[j][0])
+				print(delivery_num[i])
 
-def updt_second_pkg_loc(second_delivery, csv_address):
-	for i in range(len(second_delivery)):
-		for j in range(len(csv_address)):
-			if (second_delivery[i].address == csv_address[j][2]):
-				second_delivery_list.append(csv_address[j][0])
-				second_delivery[i].address_location = csv_address[j][0]
-				# print(second_delivery[i])
+def fastest_route(delivery_list, delivery_num, current_loc, csv_address_data):
+	if (len(delivery_list) == 0):
+		return delivery_list
+	else:
+		min_dist = 40.0
+		new_loc = 0
+		for i in range(len(delivery_list)):
+			curr_dist = find_current_dist_val(current_loc,
+											delivery_list[i].address_location,
+											csv_address_data)
+			if curr_dist <= min_dist:
+				min_dist = curr_dist
+				new_loc = delivery_list[i].address_location
+				# print(min_dist)
 
-def updt_third_pkg_loc(third_delivery, csv_address):
-	for i in range(len(third_delivery)):
-		for j in range(len(csv_address)):
-			if (third_delivery[i].address == csv_address[j][2]):
-				third_delivery_list.append(csv_address[j][0])
-				third_delivery[i].address_location = csv_address[j][0]
-				# print(third_delivery[i])
-		
+def find_current_dist_val(row, col, csv_address_data):
+	curr_dist = csv_address_data[row][col]
+	if curr_dist == '':
+		curr_dist = csv_address_data[col][row]
+	return float(curr_dist)
