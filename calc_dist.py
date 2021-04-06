@@ -26,8 +26,25 @@ def find_fastest_route():
   algo.fastest_route(truck.second_delivery, "second", 0, dist_data)
   algo.fastest_route(truck.third_delivery, "third", 0, dist_data)
 
+def find_sum(row, col):
+  global first_total_dist
+  curr_dist = dist_data[row][col]
+  if curr_dist == '':
+    curr_dist = dist_data[col][row]
+    first_total_dist += float(curr_dist)
+    print(curr_dist, first_total_dist)
+  return first_total_dist
+
+
 def calc_delivery_dist():
-  for i in range(algo.first_deliv_sorted_idx)
+  for i in range(len(algo.first_deliv_sorted_idx)):
+    # print(algo.first_deliv_sorted_idx[i])
+    try:
+      first_deliv = algo.first_deliv_sorted_idx
+      temp = find_sum(first_deliv[i], first_deliv[i + 1])
+      # print(first_deliv[i], first_deliv[i + 1], print(temp))
+    except IndexError:
+      pass
 
 def updt_pckg_algo_func():
   updt_packages()

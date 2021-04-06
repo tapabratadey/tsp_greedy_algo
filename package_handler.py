@@ -31,7 +31,7 @@ def updt_pkg_loc(delivery_list, csv_address):
 # updating sorted list for each delivery.
 # setting the starting point to from location 0
 def updt_starting_loc():
-  algo.first_deliv_sorted_idx.insert(0, '0')
-  algo.second_deliv_sorted_idx.insert(0, '0')
-  algo.third_deliv_sorted_idx.insert(0, '0')
+  algo.first_deliv_sorted_idx.insert(0, 0)
+  algo.second_deliv_sorted_idx.insert(0, 0)
+  algo.third_deliv_sorted_idx.insert(0, 0)
   
