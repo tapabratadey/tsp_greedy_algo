@@ -38,21 +38,24 @@ def updt_starting_loc():
 def updt_delivery(delivered_time, sorted_deliv, my_hash, deliv_num):
   sorted_deliv.status = delivered_time
   id = sorted_deliv.id
-  my_hash.add(id, deliv_num)
+  my_hash.add(id, sorted_deliv)
 
-def updt_del_time_n_hash(delivered_time, i, my_hash, truck):
-  updt_delivery(delivered_time, algo.first_deliv_sorted[i],
+def updt_del_time_n_hash(delivered_time, i, my_hash, truck, msg):
+  if msg == "first":
+    updt_delivery(delivered_time, algo.first_deliv_sorted[i],
                 my_hash, truck.first_delivery)
-  updt_delivery(delivered_time, algo.second_deliv_sorted[i],
+  elif msg == "second":
+    updt_delivery(delivered_time, algo.second_deliv_sorted[i],
                 my_hash, truck.second_delivery)
-  updt_delivery(delivered_time, algo.third_deliv_sorted[i],
+  elif msg == "third":
+    updt_delivery(delivered_time, algo.third_deliv_sorted[i],
                 my_hash, truck.third_delivery)
   
 def calc_pckg_time(get_curr_dist, deliv_time_list):
   pckg_time = get_curr_dist / 18
   conv_time_format = '{0:02.0f}:{1:02.0f}'.format(*divmod(pckg_time * 60, 60)) + ':00'
   deliv_time_list.append(conv_time_format)
-  deliv_time = (dt.timedelta())
+  deliv_time = dt.timedelta()
   for i in range(len(deliv_time_list)):
     (h, m, s) = deliv_time_list[i].split(':')
     conv = dt.timedelta(hours=int(h), minutes=int(m), seconds=int(s))

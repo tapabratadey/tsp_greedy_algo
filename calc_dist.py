@@ -35,7 +35,7 @@ def find_sum(row, col, dist_value):
   dist_value += float(curr_dist)
   return dist_value
 
-def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list):
+def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list, msg):
   for i in range(len(deliv_sorted_idx)):
     try:
       dist_value = find_sum(deliv_sorted_idx[i], deliv_sorted_idx[i + 1], dist_value)
@@ -43,8 +43,12 @@ def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list):
                                                 deliv_sorted_idx[i + 1],
                                                 dist_data)
       delivered_time = pckg_hndl.calc_pckg_time(get_curr_dist, deliv_time_list)
-      pckg_hndl.updt_del_time_n_hash(delivered_time, i, get_hash.my_hash, truck)
-
+      if msg == "first":
+        pckg_hndl.updt_del_time_n_hash(delivered_time, i, get_hash.my_hash, truck, msg)
+      elif msg == "second":
+        pckg_hndl.updt_del_time_n_hash(delivered_time, i, get_hash.my_hash, truck, msg)
+      elif msg == "third":  
+        pckg_hndl.updt_del_time_n_hash(delivered_time, i, get_hash.my_hash, truck, msg)
     except IndexError:
       pass
   return dist_value
@@ -53,16 +57,18 @@ def calc_delivery_dist():
   first_total_dist = 0
   second_total_dist = 0
   third_total_dist = 0
-
   first_total_dist = calc_delivery_dist_sum(algo.first_deliv_sorted_idx, 
                                             first_total_dist,
-                                              first_deliv_time)
+                                              first_deliv_time,
+                                              "first")
   second_total_dist = calc_delivery_dist_sum(algo.second_deliv_sorted_idx, 
                                             second_total_dist,
-                                            second_deliv_time)
+                                            second_deliv_time,
+                                            "second")
   third_total_dist = calc_delivery_dist_sum(algo.third_deliv_sorted_idx, 
                                             third_total_dist,
-                                             third_deliv_time)
+                                            third_deliv_time,
+                                            "third")
   
   return first_total_dist + second_total_dist + third_total_dist
 
@@ -70,11 +76,9 @@ def updt_pckg_algo_func():
   updt_packages()
   pckg_hndl.updt_starting_loc()
   find_fastest_route()
-  calc_delivery_dist()
 
 def total_dist():
   updt_pckg_algo_func()
   total_dist = calc_delivery_dist()
-
   return total_dist
   
