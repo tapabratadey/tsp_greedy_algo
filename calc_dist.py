@@ -2,9 +2,14 @@ import csv
 import load_truck as truck
 import package_handler as pckg_hndl
 import algo as algo
+import datetime as dt
+import read_csv as get_hash
 
 dist_data = []
 dist_data_name = []
+first_deliv_time = ['8:00:00']
+second_deliv_time = ['9:05:00']
+third_deliv_time = ['11:00:00']
 
 with open("csv/distance_table_data.csv") as dist_data_file:
   dist_data = list(csv.reader(dist_data_file, delimiter=','))
@@ -12,9 +17,6 @@ with open("csv/distance_table_data.csv") as dist_data_file:
 with open("csv/distance_table_data_name.csv") as dist_data_name_file:
   dist_data_name = list(csv.reader(dist_data_name_file, delimiter=','))
 
-first_total_dist = 0
-second_total_dist = 0
-third_total_dist = 0
 
 def updt_packages():
   pckg_hndl.updt_pkg_loc(truck.first_delivery, dist_data_name)
@@ -26,34 +28,53 @@ def find_fastest_route():
   algo.fastest_route(truck.second_delivery, "second", 0, dist_data)
   algo.fastest_route(truck.third_delivery, "third", 0, dist_data)
 
-def find_sum(row, col):
-  global first_total_dist
+def find_sum(row, col, dist_value):
   curr_dist = dist_data[row][col]
   if curr_dist == '':
     curr_dist = dist_data[col][row]
-    first_total_dist += float(curr_dist)
-    print(curr_dist, first_total_dist)
-  return first_total_dist
+  dist_value += float(curr_dist)
+  return dist_value
 
-
-def calc_delivery_dist():
-  for i in range(len(algo.first_deliv_sorted_idx)):
-    # print(algo.first_deliv_sorted_idx[i])
+def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list):
+  for i in range(len(deliv_sorted_idx)):
     try:
-      first_deliv = algo.first_deliv_sorted_idx
-      temp = find_sum(first_deliv[i], first_deliv[i + 1])
-      # print(first_deliv[i], first_deliv[i + 1], print(temp))
+      dist_value = find_sum(deliv_sorted_idx[i], deliv_sorted_idx[i + 1], dist_value)
+      get_curr_dist = algo.find_current_dist_val(deliv_sorted_idx[i],
+                                                deliv_sorted_idx[i + 1],
+                                                dist_data)
+      delivered_time = pckg_hndl.calc_pckg_time(get_curr_dist, deliv_time_list)
+      pckg_hndl.updt_del_time_n_hash(delivered_time, i, get_hash.my_hash, truck)
+
     except IndexError:
       pass
+  return dist_value
+
+def calc_delivery_dist():
+  first_total_dist = 0
+  second_total_dist = 0
+  third_total_dist = 0
+
+  first_total_dist = calc_delivery_dist_sum(algo.first_deliv_sorted_idx, 
+                                            first_total_dist,
+                                              first_deliv_time)
+  second_total_dist = calc_delivery_dist_sum(algo.second_deliv_sorted_idx, 
+                                            second_total_dist,
+                                            second_deliv_time)
+  third_total_dist = calc_delivery_dist_sum(algo.third_deliv_sorted_idx, 
+                                            third_total_dist,
+                                             third_deliv_time)
+  
+  return first_total_dist + second_total_dist + third_total_dist
 
 def updt_pckg_algo_func():
   updt_packages()
   pckg_hndl.updt_starting_loc()
   find_fastest_route()
   calc_delivery_dist()
-  # for i in range(len(algo.second_deliv_sorted_idx)):
-  # 	print(algo.second_deliv_sorted_idx[i])
 
 def total_dist():
-  updt_pckg_algo_func()	
-  return first_total_dist + second_total_dist + third_total_dist
+  updt_pckg_algo_func()
+  total_dist = calc_delivery_dist()
+
+  return total_dist
+  
