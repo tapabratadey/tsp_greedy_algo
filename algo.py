@@ -29,7 +29,8 @@ def fastest_route(delivery_list, delivery_num, current_loc, csv_address_data):
     except IndexError:
       pass
 
-# greedy algorithm O(n^2)
+# greedy algorithm O(N)
+# 2 loops each takeing O(n) thus O(2N) = O(N)
 
 # first loop gets back the distance between two packages
 # and compares with the min_dist which is initally set to 20
@@ -49,14 +50,14 @@ def find_min_dist(delivery_list,
                   min_dist,
                   new_loc,
                   curr_dist):
-    for i in range(len(delivery_list)):
+    for i in range(len(delivery_list)): # O(N)
       temp = find_current_dist_val(current_loc,
                       delivery_list[i].address_location,
                       csv_address_data)
       if temp <= min_dist:
         min_dist = temp
         new_loc = delivery_list[i].address_location
-    for i in range(len(delivery_list)):
+    for i in range(len(delivery_list)): # O(N)
       temp = find_current_dist_val(current_loc,
                       delivery_list[i].address_location,
                       csv_address_data)
