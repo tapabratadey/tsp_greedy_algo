@@ -12,8 +12,12 @@ def welcome_msg():
     print("\nWelcome to Parcel Delivery Service")
     print("----------------------------------\n")
 
+# displays total travel time
+
 def display_total_distance_traveled():
     print("Total miles traveled : ", dist.total_dist(), " miles\n")
+
+# user_input() asks user three options
 
 def user_input():
   try:
@@ -39,6 +43,11 @@ def user_input():
   except KeyboardInterrupt:
       print('\nBye!')
       pass
+
+# start of the program
+# init_prog() reads file to store data
+# display_total_distance_traveled() calculates total distance
+# user_input() asks user for input and displays related information
 
 def main():
     welcome_msg()

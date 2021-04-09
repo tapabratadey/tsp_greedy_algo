@@ -5,29 +5,35 @@ import algo as algo
 import datetime as dt
 import read_csv as get_hash
 
+# vars
 dist_data = []
 dist_data_name = []
 first_deliv_time = ['8:00:00']
 second_deliv_time = ['9:05:00']
 third_deliv_time = ['11:00:00']
 
+# opens distance files to read in data and addresses
 with open("csv/distance_table_data.csv") as dist_data_file:
   dist_data = list(csv.reader(dist_data_file, delimiter=','))
 
 with open("csv/distance_table_data_name.csv") as dist_data_name_file:
   dist_data_name = list(csv.reader(dist_data_name_file, delimiter=','))
 
-
+# calls updt_pkg_loc in package_handler module to update
+# package locations
 def updt_packages():
   pckg_hndl.updt_pkg_loc(truck.first_delivery, dist_data_name)
   pckg_hndl.updt_pkg_loc(truck.second_delivery, dist_data_name)
   pckg_hndl.updt_pkg_loc(truck.third_delivery, dist_data_name)
 
+# calls fastest_route in algo module to calculate each delivery's
+# delivery time
 def find_fastest_route():
   algo.fastest_route(truck.first_delivery, "first", 0, dist_data)
   algo.fastest_route(truck.second_delivery, "second", 0, dist_data)
   algo.fastest_route(truck.third_delivery, "third", 0, dist_data)
 
+# finds the sum between two addresses
 def find_sum(row, col, dist_value):
   curr_dist = dist_data[row][col]
   if curr_dist == '':
@@ -35,6 +41,7 @@ def find_sum(row, col, dist_value):
   dist_value += float(curr_dist)
   return dist_value
 
+# calculates each delivery's time by callin
 def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list, msg):
   for i in range(len(deliv_sorted_idx)):
     try:
@@ -53,6 +60,7 @@ def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list, msg):
       pass
   return dist_value
 
+# gets called by total_dist (refactored function)
 def calc_delivery_dist():
   first_total_dist = 0
   second_total_dist = 0
@@ -72,11 +80,16 @@ def calc_delivery_dist():
   
   return first_total_dist + second_total_dist + third_total_dist
 
+# updates package locations and add the starting location from the hub
+# calls find_fastest route() to sort packages in each truck to find
+# an optimized distance
 def updt_pckg_algo_func():
   updt_packages()
   pckg_hndl.updt_starting_loc()
   find_fastest_route()
 
+# gets called in main.py to find total delivery distance by the 3 trucks
+# tota_dist() calls two funcs
 def total_dist():
   updt_pckg_algo_func()
   total_dist = calc_delivery_dist()

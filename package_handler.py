@@ -1,5 +1,4 @@
 import datetime as dt
-# import calc_dist as dist
 import algo as algo
 
 # time conversion
@@ -35,11 +34,13 @@ def updt_starting_loc():
   algo.second_deliv_sorted_idx.insert(0, 0)
   algo.third_deliv_sorted_idx.insert(0, 0)
 
+# updates each package's delivery time and stores in the hash table
 def updt_delivery(delivered_time, sorted_deliv, my_hash, deliv_num):
   sorted_deliv.status = delivered_time
   id = sorted_deliv.id
   my_hash.add(id, sorted_deliv)
 
+# gets called by calc_dist module to update package delivery time
 def updt_del_time_n_hash(delivered_time, i, my_hash, truck, msg):
   if msg == "first":
     updt_delivery(delivered_time, algo.first_deliv_sorted[i],
@@ -51,6 +52,7 @@ def updt_del_time_n_hash(delivered_time, i, my_hash, truck, msg):
     updt_delivery(delivered_time, algo.third_deliv_sorted[i],
                 my_hash, truck.third_delivery)
   
+# calculates each package's delivery time
 def calc_pckg_time(get_curr_dist, deliv_time_list):
   pckg_time = get_curr_dist / 18
   conv_time_format = '{0:02.0f}:{1:02.0f}'.format(*divmod(pckg_time * 60, 60)) + ':00'
