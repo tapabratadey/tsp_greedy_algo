@@ -41,7 +41,13 @@ def find_sum(row, col, dist_value):
   dist_value += float(curr_dist)
   return dist_value
 
-# calculates each delivery's time by callin
+# calculates each delivery's time by callin find_sum
+# pckg_hndl.calc_pckg_time calculates how long it take for a package
+# to get delivered if the truck drives 18 miles per hour
+# updates the delivery time and updaets the hash table
+# in pckg_hndl.updt_del_time_n_hash()
+
+# O(n^2) because of a 2nd loop inside calc_pkg_time
 def calc_delivery_dist_sum(deliv_sorted_idx, dist_value, deliv_time_list, msg):
   for i in range(len(deliv_sorted_idx)):
     try:

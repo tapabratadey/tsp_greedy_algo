@@ -45,16 +45,16 @@ class HashTable:
 
     # remove a data matching with the data_key in the hash table
     # O(n)
-    def remove(self, data_key):
-        # find which bucket the data_key is in
-        bucket = self.create_hash(data_key)
-        bucket_list = self.table[bucket]
+    # def remove(self, data_key):
+    #     # find which bucket the data_key is in
+    #     bucket = self.create_hash(data_key)
+    #     bucket_list = self.table[bucket]
 
-        # if the data_key matches the key_value[0]
-        # then remove the key value pair from the bucket_list
-        # else return None
-        for key_value in bucket_list:
-            if key_value[0] == data_key:
-              bucket_list.remove([key_value[0], key_value[1]])
-            else:
-              print("The data key does not exist")
+    #     # if the data_key matches the key_value[0]
+    #     # then remove the key value pair from the bucket_list
+    #     # else return None
+    #     for key_value in bucket_list:
+    #         if key_value[0] == data_key:
+    #           bucket_list.remove([key_value[0], key_value[1]])
+    #         else:
+    #           print("The data key does not exist")
