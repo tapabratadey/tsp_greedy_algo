@@ -2,7 +2,18 @@ import datetime as dt
 import read_csv as get_hash
 
 def search_pckg():
-  return
+    usr_input_id = input("\nEnter Package id:\n")
+    start_time = str(get_hash.my_hash.search(int(usr_input_id)).start_time)
+    (h, m, s) = start_time.split(':')
+    convert_sTime = dt.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+    status_time = str(get_hash.my_hash.search(int(usr_input_id)).status)
+    (h, m, s) = status_time.split(':')
+    convert_status_Time = dt.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+    usr_input_time = input("\n\nEnter a time in HH:MM:SS format: \n")
+    (h, m, s) = usr_input_time.split(':')
+    convert_uTime = dt.timedelta(hours=int(h), minutes=int(m), seconds=int(s))
+    display_time(start_time, status_time, convert_sTime, convert_status_Time,
+                get_hash.my_hash.search(int(usr_input_id)), convert_uTime)
 
 def pckg_status():
     usr_time_input = input("\nTo view delivery status, please enter a time "
@@ -17,8 +28,6 @@ def get_pckg_info(i, convert_uTime):
     start_time = str(hash_search.start_time)
     status_time = str(hash_search.status)
     convert_times(start_time, status_time, hash_search, convert_uTime)
-
-
 
 def convert_times(start_time, status_time, hash_search, convert_uTime):
     (h, m, s) = start_time.split(':')
